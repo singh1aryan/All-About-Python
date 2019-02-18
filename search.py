@@ -19,7 +19,7 @@ def linear_search(arr,target):
 # linear search in sorted list
 
 def linear_sorted_search(arr, target):
-    for i in len(arr):
+    for i in range(1,len(arr)):
         if arr[i]==target:
             return True
         if arr[i]>target:
@@ -37,11 +37,28 @@ def smallest_in_list(arr):
     
 def larget_in_list(arr):
     largest = arr[0]
-    for i in range len(arr):
+    for i in range(1,len(arr)):
         if largest<arr[i]:
             largest=arr[i]
     return largest
 
+# binary search
+    
+def binary_search(arr,target):
+    low = 0
+    high = len(arr)
+    
+    while low<=high:
+        mid = (low+high)//2
+        if arr[mid] == target:
+            return True
+        if arr[mid] > target:
+            low = mid+1
+        elif arr[mid] < target:
+            high = mid-1
+    return False
+
+            
 
 
 

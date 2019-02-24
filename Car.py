@@ -79,7 +79,35 @@ class Battery():
         elif self.size == 85:
             return 270
     
-# can also bring in the classes in methods, making an instance of the class  
+# can also bring in the classes in methods, making an instance of the class
+            
+'''
+from car import Car, ElectricCar
+# Make lists to hold a fleet of cars.
+    gas_fleet = []
+    electric_fleet = []
+    
+# Make 500 gas cars and 250 electric cars.
+
+for _ in range(500):
+    car = Car('ford', 'focus', 2016)
+    gas_fleet.append(car)
+
+for _ in range(250):
+    ecar = ElectricCar('nissan', 'leaf', 2016)
+    electric_fleet.append(ecar)
+# Fill the gas cars, and charge electric cars.
+
+for car in gas_fleet:
+    car.fill_tank()
+for ecar in electric_fleet:
+    ecar.charge()
+
+print("Gas cars:", len(gas_fleet))
+print("Electric cars:", len(electric_fleet))
+
+
+'''
         
 
 

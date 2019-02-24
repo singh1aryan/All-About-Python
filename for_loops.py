@@ -14,3 +14,24 @@ for letter in "Aryan singh":
 arr = ["a","b","c","d","e"]
 for l in arr:
     print(l)
+    
+for number in range(1, 1001):
+    print(number)
+
+
+ages = [93, 99, 66, 17, 85, 1, 35, 82, 2, 77]
+youngest = min(ages)
+oldest = max(ages)
+total_years = sum(ages)
+
+squares = []
+for x in range(1, 11):
+    square = x**2
+    squares.append(square)
+    
+names = ['kai', 'abe', 'ada', 'gus', 'zoe']
+upper_names = []
+for name in names:
+    upper_names.append(name.upper())
+    
+

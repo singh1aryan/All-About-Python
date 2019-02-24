@@ -26,3 +26,48 @@ print(monthConversion.get("Feb"))
 # prints the default thing if it doesn't find the word
 print(monthConversion.get("Mine","This is default version"))
 
+users = []
+
+new_user = {
+        'last': 'singh',
+        'first': 'aryan',
+        'email': 'aryansingh'
+        }
+users.append(new_user)
+
+for user_dict in users:
+    for k, v in user_dict.items():
+        print(k + ": " + v)
+        print("\n") 
+
+
+# nesting dictionaries
+
+users1 = {
+    'names': {
+        'first': 'albert',
+        'last': 'einstein',
+        'location': 'princeton',            
+        },
+    'mcurie': {
+        'first': 'marie',
+        'last': 'curie',
+        'location': 'paris',
+        },
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

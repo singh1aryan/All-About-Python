@@ -16,6 +16,10 @@ Created on Fri Mar 15 21:57:18 2019
 Example:
 sort these linked list
 
+
+some methods to do this:
+    1. merge 2 lists for every 2 lists, using a loop
+    
 '''
 
 def merge_k_list():

@@ -72,7 +72,22 @@ class LinkedList():
             curr.next=curr.next.next
         
         self.size-=1
+
+def sortedSearch(head, target):
+    currNode = head
+    while currNode is not None and currNode.data<target:
+        if currNode.data == target:
+            return True
+        else:
+            currNode = currNode.next
+        return False
+
         
+# self is only for reference, we don't care about it when initializing
+list_one = LinkedList()
+list_one.add_to_head(3)
+list_one.add_to_head(4)
+print(list_one.size)
         
         
         

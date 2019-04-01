@@ -13,53 +13,79 @@ For example:
 false 42
 
 A V -B
-'''
-import itertools
 
-symbols = {'^', 'V', '→', '↔'} # Symbols for easy copying into logical statement
+we have the alpha and we negate it always
+we then use the kb and then add alpha to it
+we prove by contradiction always
 
-statement = '~(A V B) ↔ (~A V ~B)'
-
-#args are number of variables
-def generate_table(a,l,r):
-    if l==r:
-        print(a)
+we take c1 and c2, solve that to find c3 and do that recursively
+R
+-R V S
+'''     
+from utils import *
+Expr = []
+_NaryExprTable = {'&':TRUE, '|':FALSE, '+':ZERO, '*':ONE}
+def NaryExpr(op, *args):
+    """Create an Expr, but with an nary, associative op, so we can promote
+    nested instances of the same op up to the top level.
+    >>> NaryExpr('&', (A&B),(B|C),(B&C))
+    (A & B & (B | C) & B & C)
+    """
+    arglist = []
+    for arg in args:
+        if arg.op == op: arglist.extend(arg.args)
+        else: arglist.append(arg)
+    if len(args) == 1:
+        return args[0]
+    elif len(args) == 0:
+        return _NaryExprTable[op]
     else:
-        for i in range(l,r+1):
-            swap(a,i,l)
-            generate_table(a,l+1,r)
-            swap(a,i,l) # backtrack
-            
-def swap(arr, i, j):
-    temp = arr[i]
-    arr[i]=arr[j]
-    arr[j]=temp
-        
-string = "TFT"
-n = len(string) 
-a = list(string) 
-#generate_table(a,0,n-1)
-
-l2=[]
-def generate(n,l1,l3):
-    if n==0:
-        if l1 not in l2:
-            print(l1)
-            l2.append(l1)
-    if n>0 :
-        for i in (0,2):
-            generate(n-1,l1+'T',l3)
-            generate(n-1,l1+'F',l3)
+        return Expr(op, *arglist)
     
-generate(3,'',[])
-#print(l3)
+def conjuncts(s):
+    """Return a list of the conjuncts in the sentence s.
+    >>> conjuncts(A & B)
+    [A, B]
+    >>> conjuncts(A | B)
+    [(A | B)]
+    """
+    if isinstance(s, Expr) and s.op == '&':
+        return s.args
+    else:
+        return [s]
+    
+def disjuncts(s):
+    """Return a list of the disjuncts in the sentence s.
+    >>> disjuncts(A | B)
+    [A, B]
+    >>> disjuncts(A & B)
+    [(A & B)]
+    """
+    if isinstance(s, Expr) and s.op == '|':
+        return s.args
+    else:
+        return [s]
+    
+def pl_resolve(ci,cj):
+    clauses = []
+    for di in disjuncts(ci):
+        for dj in disjuncts(cj):
+            if di == ~dj or ~di == dj:
+                dnew = unique(removeall(di, disjuncts(ci)) + removeall(dj, disjuncts(cj)))
+                clauses.append(NaryExpr('|', *dnew))
+    return clauses
 
-def generate_loops(n,l=[]):
-    if not n:
-        print(l)
-    for i in [True, False]:
-        generate_loops(n-1,l+[i])
+def resolver(KB, alpha):
+    clauses = KB.clauses + conjuncts(~alpha)
+    new = set()
+    while True:
+        n = len(clauses)
+        pairs = [(clauses[i],clauses[j]) for i in range(n) for j in range(i+1,n)]
+        for (ci, cj) in pairs:
+            resolvents = pl_resolve(ci, cj)
+            if False in resolvents: return True
+            new.union_update(set(resolvents))
+        if new.issubset(set(clauses)): return False
+        for c in new:
+            if c not in clauses: clauses.append(c)
         
-#generate_loops(3,[])
-#table = list(itertools.product([False, True], repeat=3))
-#print(table)

@@ -89,3 +89,22 @@ def resolver(KB, alpha):
         for c in new:
             if c not in clauses: clauses.append(c)
         
+
+
+# & - and, | for union, ~ for negate
+# Example is ~(A|B) -- ~A & ~B
+def negate(alpha):
+    # we have to pass in the ~
+    newl = []
+    i=0
+    while True:
+        if alpha[i] == '~':
+            newl.append('~')
+            if alpha[i+1] == '(':# enter inside parenthesis
+                newl.append('(')
+                newl.append('~')
+            else:
+                newl.append('')
+                
+        
+            

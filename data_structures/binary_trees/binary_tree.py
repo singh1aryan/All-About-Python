@@ -63,4 +63,21 @@ def postOrder(node):
     postOrder(node.left)
     postOrder(node.right)
     print(node.data)
+
+''' return true if the sum of the path is target '''
+def hasSum(node, target):
+    if node is None:
+        return target == 0
+    else:
+        return hasSum(node.left, target-node.data) or hasSum(node.right, target-node.data)
+    
+'''
+Recusrive Questions - Easy / Medium / Hard
+    1. Mirror of the tree
+    2. Print all paths
+    3. Create a duplicate of every node and add it, double tree
+    4. count trees - How many can we make from a key
+    5. Check if it is a BST or not
+
+'''    
     

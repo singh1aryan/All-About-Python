@@ -22,89 +22,74 @@ we take c1 and c2, solve that to find c3 and do that recursively
 R
 -R V S
 '''     
-from utils import *
-Expr = []
-_NaryExprTable = {'&':TRUE, '|':FALSE, '+':ZERO, '*':ONE}
-def NaryExpr(op, *args):
-    """Create an Expr, but with an nary, associative op, so we can promote
-    nested instances of the same op up to the top level.
-    >>> NaryExpr('&', (A&B),(B|C),(B&C))
-    (A & B & (B | C) & B & C)
-    """
-    arglist = []
-    for arg in args:
-        if arg.op == op: arglist.extend(arg.args)
-        else: arglist.append(arg)
-    if len(args) == 1:
-        return args[0]
-    elif len(args) == 0:
-        return _NaryExprTable[op]
-    else:
-        return Expr(op, *arglist)
-    
-def conjuncts(s):
-    """Return a list of the conjuncts in the sentence s.
-    >>> conjuncts(A & B)
-    [A, B]
-    >>> conjuncts(A | B)
-    [(A | B)]
-    """
-    if isinstance(s, Expr) and s.op == '&':
-        return s.args
-    else:
-        return [s]
-    
-def disjuncts(s):
-    """Return a list of the disjuncts in the sentence s.
-    >>> disjuncts(A | B)
-    [A, B]
-    >>> disjuncts(A & B)
-    [(A & B)]
-    """
-    if isinstance(s, Expr) and s.op == '|':
-        return s.args
-    else:
-        return [s]
-    
-def pl_resolve(ci,cj):
-    clauses = []
-    for di in disjuncts(ci):
-        for dj in disjuncts(cj):
-            if di == ~dj or ~di == dj:
-                dnew = unique(removeall(di, disjuncts(ci)) + removeall(dj, disjuncts(cj)))
-                clauses.append(NaryExpr('|', *dnew))
-    return clauses
 
-def resolver(KB, alpha):
-    clauses = KB.clauses + conjuncts(~alpha)
+kb = []
+alpha = ['-S']
+def resolver(clauses):
+    #clauses = KB.clauses + conjuncts(~alpha)
+    c=0
     new = set()
     while True:
         n = len(clauses)
         pairs = [(clauses[i],clauses[j]) for i in range(n) for j in range(i+1,n)]
         for (ci, cj) in pairs:
             resolvents = pl_resolve(ci, cj)
+            # if we have the empty clause in resolvents, return true
+            
             if False in resolvents: return True
             new.union_update(set(resolvents))
         if new.issubset(set(clauses)): return False
         for c in new:
-            if c not in clauses: clauses.append(c)
-        
-
-
-# & - and, | for union, ~ for negate
-# Example is ~(A|B) -- ~A & ~B
-def negate(alpha):
-    # we have to pass in the ~
-    newl = []
-    i=0
-    while True:
-        if alpha[i] == '~':
-            newl.append('~')
-            if alpha[i+1] == '(':# enter inside parenthesis
-                newl.append('(')
-                newl.append('~')
-            else:
-                newl.append('')
+            if c not in clauses: 
+                clauses.append(c)
+    
+    
+def pl_resolve(ci, cj):
+    l = []
+    rem = []
+    c=0
+    # if ci is p and cj has -p
+    for i in range(0,len(ci)):
+        if '-'+ci[i] in cj:
+            c=1
+            rem.append(ci[i])
+            rem.append('-'+ci[i])
+            # if ci is -p and cj has p
+        if len(ci[i].split('-')) > 1:
+            s = ci[i].split('-')
+            if s[1] in cj:
+                c=1
+                rem.append(s[1])
+                rem.append('-'+s[1])
                 
-        
+    if c==1:
+        for i in range(0,len(ci)):
+            if ci[i] not in rem:
+                l.append(ci[i])
+                
+        for i in range(0,len(cj)):
+            if cj[i] not in rem:
+                l.append(cj[i])
+                
+    return l
             
+    
+with open('test2.txt') as f:
+    #print(f.read())
+    c=0
+    cnf = ""
+    lines = f.readlines();
+    for i in lines:
+        thisline = i.split();
+        kb.append(thisline)
+    cnf = cnf[0:len(cnf)-1]
+    kb.append(alpha)
+    resolver(kb)
+    print(kb) 
+   
+'''
+a = 'a'
+print(a.split('-'))
+'''
+print(pl_resolve(['-P','-R'],['Q','R']))
+print(pl_resolve(['-P','R'],['Q','-R']))

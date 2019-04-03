@@ -70,7 +70,6 @@ def hasSum(node, target):
         return target == 0
     else:
         return hasSum(node.left, target-node.data) or hasSum(node.right, target-node.data)
-    
 '''
 Recusrive Questions - Easy / Medium / Hard
     1. Mirror of the tree
@@ -78,6 +77,19 @@ Recusrive Questions - Easy / Medium / Hard
     3. Create a duplicate of every node and add it, double tree
     4. count trees - How many can we make from a key
     5. Check if it is a BST or not
-
-'''    
     
+'''    
+def mirror_tree(node):
+    return
+
+def print_all_paths(node):
+    return
+
+def double_tree(node):
+    return
+
+def count_trees(node, key):
+    return
+
+def verify_BST(node):
+    return

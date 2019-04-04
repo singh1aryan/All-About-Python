@@ -101,6 +101,8 @@ def print_all_paths(node, path, pathlen):
         print_all_paths(node.left, path, pathlen)
         print_all_paths(node.left, path, pathlen)
 
+def printArray():
+    return
 
 def double_tree(node):
     return

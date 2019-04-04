@@ -21,57 +21,103 @@ we prove by contradiction always
 we take c1 and c2, solve that to find c3 and do that recursively
 R
 -R V S
+
+empty clause, resolution rule kills it
 '''     
 
 kb = []
-alpha = ['-S']
+alpha = ['-F']
 def resolver(clauses):
     #clauses = KB.clauses + conjuncts(~alpha)
     c=0
-    new = set()
+    new = []
     while True:
         n = len(clauses)
         pairs = [(clauses[i],clauses[j]) for i in range(n) for j in range(i+1,n)]
         for (ci, cj) in pairs:
-            resolvents = pl_resolve(ci, cj)
-            # if we have the empty clause in resolvents, return true
+            resolvents = pl_resolve(ci, cj)# list of list
+            # check if tautology or not
+            if resolvents == 9:#if not resolved
+                continue
+            # check for tautologies
+            # if there is a clause with i and -i, don't add it
+            for res in resolvents:
+                if len(res) == 0:
+                    print(c)
+                    return True
+                if res not in new:
+                    new.append(res)
+                    c+=1
             
-            if False in resolvents: return True
-            new.union_update(set(resolvents))
-        if new.issubset(set(clauses)): return False
-        for c in new:
-            if c not in clauses: 
-                clauses.append(c)
+        # if new ⊆ clauses then return false
+        m=0
+        for i in new:
+            if i in clauses:
+                m+=1
+        if m == len(new):
+            print(c)
+            return False
+            
+        # adding to clauses
+        for i in new:
+            if i not in clauses:
+                clauses.append(i)
+                
+        # removing duplicates from clauses using set
+        set(tuple(row) for row in clauses)
+        clauses = [list(item) for item in set(tuple(row) for row in clauses)]    
+        
+    return clauses
     
     
 def pl_resolve(ci, cj):
-    l = []
-    rem = []
+    ll = []
     c=0
     # if ci is p and cj has -p
+    # ['-P','Q','R','S'],['P','Q','-R','-S']
     for i in range(0,len(ci)):
+        rem = []
         if '-'+ci[i] in cj:
             c=1
-            rem.append(ci[i])
-            rem.append('-'+ci[i])
-            # if ci is -p and cj has p
-        if len(ci[i].split('-')) > 1:
-            s = ci[i].split('-')
-            if s[1] in cj:
-                c=1
-                rem.append(s[1])
-                rem.append('-'+s[1])
-                
-    if c==1:
-        for i in range(0,len(ci)):
-            if ci[i] not in rem:
-                l.append(ci[i])
-                
-        for i in range(0,len(cj)):
-            if cj[i] not in rem:
-                l.append(cj[i])
-                
-    return l
+            l=[]
+            rem.append('-'+ci[i])#-r
+            rem.append(ci[i])#r
+            for j in ci:
+                if j not in rem:
+                    l.append(j)
+            for j in cj:
+                if j not in rem and j not in l:
+                    l.append(j)
+            if l not in ll:
+                ll.append(l)
+    
+    for i in range(0,len(cj)):
+        rem = []
+        if '-'+cj[i] in ci:
+            c=1
+            l=[]
+            rem.append('-'+cj[i])#-r
+            rem.append(cj[i])#r
+            for j in ci:
+                if j not in rem:
+                    l.append(j)
+            for j in cj:
+                if j not in rem and j not in l:
+                    l.append(j)
+            if l not in ll:
+                ll.append(l)
+            
+              
+    ''' 
+    we check for the repititions as well
+    ''' 
+    if c == 0:
+        return 9
+    # removing duplicates from ll - list for the resolved clauses
+    set(tuple(row) for row in ll)
+    ll = [list(item) for item in set(tuple(row) for row in ll)]    
+        
+    return ll
             
     
 with open('test2.txt') as f:
@@ -84,12 +130,32 @@ with open('test2.txt') as f:
         kb.append(thisline)
     cnf = cnf[0:len(cnf)-1]
     kb.append(alpha)
-    resolver(kb)
-    print(kb) 
+    print(resolver(kb)) 
    
 '''
 a = 'a'
 print(a.split('-'))
+
+[R] and [-R] - [R][]
+
+print(pl_resolve(['R'],['Q','-R'])) # Q
+
+print(pl_resolve(['-P','-R'],['Q','R']))# -P,Q
+
+print(pl_resolve(['-P','R'],['Q','-R']))# -P, R
+
+print(pl_resolve(['-P','Q'],['P','Q']))# Q
+
+print(pl_resolve(['-P','-Q'],['P','Q']))# -Q , Q, do we return P -P here?
+
+print(pl_resolve(['-P'],['P']))# []
+
+print(pl_resolve(['-P','Q','R','S'],['P','Q','R','-S']))# gives 2
+
+#print(pl_resolve(['-P','Q','-R','S'],['P','Q','R','-S']))# gives 3
+
 '''
-print(pl_resolve(['-P','-R'],['Q','R']))
-print(pl_resolve(['-P','R'],['Q','-R']))
+mat = [[1,2,3],[4,5,6],[1,2,3],[7,8,9],[4,5,6]]
+set(tuple(row) for row in mat)
+a = [list(item) for item in set(tuple(row) for row in mat)]
+print(a)

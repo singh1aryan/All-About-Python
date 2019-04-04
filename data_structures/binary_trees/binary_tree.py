@@ -80,10 +80,27 @@ Recusrive Questions - Easy / Medium / Hard
     
 '''    
 def mirror_tree(node):
-    return
+    if node is not None:
+        mirror_tree(node.left)
+        mirror_tree(node.right)
+        
+        temp = node.left
+        node.left = node.right
+        node.right = temp
 
-def print_all_paths(node):
-    return
+def print_all_paths(node, path, pathlen):
+    if node is None:
+        return
+    path.append(node.data)
+    pathlen+=1
+    
+    if node.left is None and node.right is None:
+        printArray(path,pathlen)
+        
+    else:
+        print_all_paths(node.left, path, pathlen)
+        print_all_paths(node.left, path, pathlen)
+
 
 def double_tree(node):
     return

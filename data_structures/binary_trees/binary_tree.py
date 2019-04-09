@@ -111,4 +111,19 @@ def count_trees(node, key):
     return
 
 def verify_BST(node):
+    if node is None:
+        return True
+    
+    
     return
+
+
+
+
+
+
+
+
+
+
+

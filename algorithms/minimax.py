@@ -24,24 +24,24 @@ def minimax(board, depth, isMaxPlayer):
     ''' If the max condition is true, its AI's turn'''
     if isMaxPlayer == True:
         bestVal = -1000
-        for r in board:
-            for c in r:
-                if c == '_':
-                    c = player
+        for r in range(0,3):
+            for c in range(0,3):
+                if board[r][c] == '_':
+                    board[r][c] = player
                     bestVal = max(bestVal, minimax(board, depth+1, False))
-                    c = '_'
+                    board[r][c] = '_'
                 
         return bestVal
     
     ''' if the max player is false // its the opponent's turn'''
     if isMaxPlayer == False:
         bestVal = 1000
-        for r in board:
-            for c in r:            
-                if c == '_':
-                    c = opponent
+        for r in range(0,3):
+            for c in range(0,3):            
+                if board[r][c] == '_':
+                    board[r][c] = opponent
                     bestVal = min(bestVal, minimax(board, depth+1, True))
-                    c = '_'
+                    board[r][c] = '_'
                     
         return bestVal
 
@@ -90,18 +90,23 @@ def findBestMove(board):
     print(5)
     bestVal = -1000
     move = Move()
-    for r in board:
-        for c in r:
-            if c == '_':
-                c = player
+    for r in range(0,3):
+        for c in range(0,3):
+            if board[r][c] == '_':
+                board[r][c] = player
                 val = minimax(board, 0, False)
-                c = '_'
+                board[r][c] = '_'
                 if val>bestVal:
                     move.row = r
                     move.column = c
                     bestVal = val
-    print(20)
-    return bestVal
+
+    print('move row: ', move.row)
+    print('move column: ',move.column)
+    print('previous board: ',board)
+    board[move.row][move.column] = player
+    print('new board: ',board)
+
 
                
     

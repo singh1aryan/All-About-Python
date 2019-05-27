@@ -3,7 +3,7 @@
 41. first missing positive
 
 Example 1:
-HARD Problem - pretty easy one though
+HARD Problem - easy solution with sort
 Input: [1,2,0]
 Output: 3
 Example 2:

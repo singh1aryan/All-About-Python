@@ -34,7 +34,7 @@ class Solution(object):
             
             j = len(nums)-1
             
-            
+       # we look for the element now wrt 'i'     
             while j>=0 and nums[j]<=nums[i]:
                 j-=1
                 
@@ -42,6 +42,7 @@ class Solution(object):
         
         self.reverseNums(nums, i+1)
     
+    ''' reverse the array from i to end of the array'''
     def reverseNums(self, nums, i):
         left = i
         right = len(nums)-1

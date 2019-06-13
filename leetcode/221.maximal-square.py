@@ -36,6 +36,7 @@ public class Solution {
     }
 '''
 
+# edge cases missing here
 class Solution(object):
     def maximalSquare(self, matrix):
         """
@@ -45,25 +46,27 @@ class Solution(object):
         grid = []
         f=1
         for i in matrix:
-            a=[]
+            a=[0]
             if f == 1:
                 for k in i:
                     a.append(0)
                 grid.append(a)
                 f=0
+                continue
             for j in i:
                 a.append(int(j))
             grid.append(a)
             
         print(grid)
-                
+        ma = 0
         for i in range(1,len(matrix)):
             for j in range(1,len(matrix)):
                 if matrix[i][j]=='1':
                     grid[i][j] = min(grid[i-1][j-1], min(grid[i-1][j], grid[i][j-1]))+1
+                    ma = max(grid[i][j], ma)
                     
-        return max(grid)
-    
+        print(grid)
+        return ma*ma
     
 '''
 some changes needed here

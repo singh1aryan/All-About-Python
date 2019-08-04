@@ -15,4 +15,20 @@ def repeating(nums):
             a.add(i)
     print(a)
 
-repeating(nums)
+# repeating(nums)
+
+
+def non_repeating(n):
+    a = {n[0]}
+    ans = -5
+    for i in n:
+        if i in a:
+            if i == ans:
+                ans = -5
+            continue
+        else:
+            ans = i
+            a.add(i)
+    return ans
+
+print(non_repeating([1,2,3,2,1,1]))

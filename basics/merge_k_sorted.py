@@ -23,4 +23,4 @@ some methods to do this:
 '''
 
 def merge_k_list():
-    
+    return "leetcode problem"

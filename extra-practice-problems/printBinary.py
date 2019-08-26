@@ -10,3 +10,4 @@ def printBinary(digits, prefix):
         printBinary(digits-1, prefix+"1")
 
 printBinary(3, "")
+printBinary(4, "")

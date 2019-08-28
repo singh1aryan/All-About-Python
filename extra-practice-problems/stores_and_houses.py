@@ -1,0 +1,28 @@
+def house(h, s):
+    s=sorted(s)
+    a=[]
+    for i in h:
+        b = bs(s, i)
+        print(b)
+        a.append(b)
+    return a
+
+def bs(arr, target):
+    l=0 
+    r=len(arr)-1
+    while(l<r):
+        mid = int((l+r)/2)
+        if r-mid == 1:
+            if abs(target-arr[mid])>abs(target-arr[r]):
+                return arr[r]
+            else:
+                return arr[mid]
+        if arr[mid]==target:
+            return target
+        if arr[mid]>target:
+            r=mid
+        else:
+            l=mid
+
+
+print(house([5,10,17], [1,5,20,11,16]))

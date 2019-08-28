@@ -49,3 +49,53 @@ A = "25525511135"
 B = "25505011535"
 print(convert(A)) 
 print(convert(B)) 
+
+
+# Java code - backtracking
+# class Solution {
+#     private final static int MAX_VALUE = 255;
+    
+#     public List<String> restoreIpAddresses(String s) {
+#         List<String> res = new ArrayList<>();
+        
+#         if (s.length() == 0) {
+#             return res;
+#         }
+        
+#         List<String> path = new ArrayList<>();
+#         int len = s.length();
+#         dfs(0, 4, len, s, path, res);
+        
+#         return res;
+#     }
+    
+#     private void dfs(int start, int count, int len, String s, List<String> path, List<String> res) {
+        
+#         int numOfDigitsLeft = len - start;
+        
+#         if (3*count <  numOfDigitsLeft || numOfDigitsLeft < count) { 
+#             return;
+#         }
+        
+#         if (count == 0) {
+#             res.add(String.join(".", path));
+#             return;
+#         }
+        
+#         for (int size = 1; size <= 3; size++) {
+#             if (start + size - 1 >= len ) {
+#                 continue;
+#             }
+            
+#             String num = s.substring(start, start + size);
+            
+#             if (Integer.valueOf(num) <= MAX_VALUE
+#                 && (num.length() == 1 || num.charAt(0) != '0')) {
+                
+#                 path.add(num);
+#                 dfs(start + size, count - 1, len, s, path, res);
+#                 path.remove(path.size() - 1);
+#             }
+#         }
+#     }
+# }

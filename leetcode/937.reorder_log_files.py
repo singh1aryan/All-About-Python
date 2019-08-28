@@ -39,3 +39,34 @@ def loglist_withoutorder(list):
         
 
 loglist_withoutorder(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"])
+
+def reorderLogFiles(logs):
+        def f(log):
+            id_, rest = log.split(" ", 1)
+            print(id_, rest)
+            return (0, rest, id_) if rest[0].isalpha() else (1,)
+
+        # print(sorted(logs, key = f))
+        return sorted(logs, key = f) 
+
+
+reorderLogFiles(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"])
+
+def simpleLogFiles(logs):
+    letters = []
+    digits = []
+    for i in logs:
+        a = i.split(' ')
+        if a[len(a)-1].isalpha():
+            letters.append(i)
+        else:
+            digits.append(i)
+    final_logs = []
+
+    for i in letters:
+        final_logs.append(i)
+    for i in digits:
+        final_logs.append(i)
+    print(final_logs)
+
+simpleLogFiles(["a1 9 2 3 1","g1 act car","zo4 4 7","ab1 off key dog","a8 act zoo"])

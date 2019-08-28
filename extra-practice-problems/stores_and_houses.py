@@ -2,12 +2,11 @@ def house(h, s):
     s=sorted(s)
     a=[]
     for i in h:
-        b = bs(s, i)
-        print(b)
+        b = binarysearch(s, i)
         a.append(b)
     return a
 
-def bs(arr, target):
+def binarysearch(arr, target):
     l=0 
     r=len(arr)-1
     while(l<r):

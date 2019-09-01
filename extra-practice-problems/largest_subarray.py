@@ -19,5 +19,5 @@ def largest_subarray(a,k):
         break
   return a[first_idx:first_idx+k]
 
-print(largest_subarray([1,4,3,3,6,2,5,6],4))
-print(largest_subarray([1,1,2],2))
+print(largest_subarray([1,4,3,3,6,2,5,6],5)) # prints [4,3,3,6,2]
+print(largest_subarray([1,1,2],2)) # prints [1,2]

@@ -36,4 +36,3 @@ arr = [1, 5, 6, 4, -1, 5, 10]
 n = len(arr)
 print(getPairsCount(arr, n))
 
-# This code is contributed by Mohit Kumar

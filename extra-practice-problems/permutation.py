@@ -1,3 +1,9 @@
+#  permute a string
+# backtracking of it's kind
+# we choose a character, remove it from the string, 
+# explore more items, unchoose the character, 
+# add it back to the string
+
 def permute(s, chosen):
     if len(s)==0:
         print(chosen)

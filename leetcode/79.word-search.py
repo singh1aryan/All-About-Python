@@ -36,9 +36,9 @@ def exist(board, word, i, j, k):
         return True
     # backtracking - choose, explore and unchoose
     board[i][j] = '-'
-    if(exist(board, word, i+1, j, k+1) or exist(board, word, i, j+1, k+1) or exist(board, word, i-1, j, k+1) or exist(board, word, i, j-1, k+1)):
-        return True
+    found = exist(board, word, i+1, j, k+1) or exist(board, word, i, j+1, k+1) or exist(board, word, i-1, j, k+1) or exist(board, word, i, j-1, k+1)
     board[i][j] = ch
+    return found
 
 
 a = [
@@ -49,6 +49,8 @@ print(word_search(a, "abdg"))# true
 print(word_search(a, "abdgf"))# true
 print(word_search(a, "abd"))# true
 print(word_search(a, "abdc"))# true
+print(word_search(a, "bdc"))# true
+print(word_search(a, "abdt"))# false
+print(word_search(a, "aed"))# true
+print(word_search(a, "bdcw"))# false
 
-
-# Learning points - Recursion, DFS, Backtracking + DFS, How to recursively backtrack?

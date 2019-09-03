@@ -2,8 +2,8 @@
 Q) Remove duplicates from a list
 
 Approaches:
-    python: - make it a set, and then convert back to list
-    java: - 
+    python: - make it a set, and then convert back to list or use a list/set with 'in' keyword
+    java: - use the contains() method for a list/set - using set is much better(faster)
 
 '''
 

@@ -18,7 +18,8 @@ def insertion_sort(nums):
 
     return nums
 
-# Complexity - 
+# Time Complexity - O(N), O(N^2), O(N^2) - Best, Average, Worst
+# Space Complexity -  O(1) 
 print(insertion_sort([1,3,4,2,6,5]))
 print(insertion_sort([1,3,24,2,6,5]))
 print(insertion_sort([1,13,4,2,6,5]))

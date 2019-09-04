@@ -18,3 +18,12 @@ def reverseString(s):
             
 
 print(reverseString(['a','b','c','d','e','f','g']))
+
+
+def reverse(string):
+    if len(string) == 0:
+        return string
+    else:
+        return reverse(string[1:]) + string[0]
+        
+print(reverse("asdasf"))

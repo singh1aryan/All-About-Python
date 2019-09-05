@@ -64,7 +64,7 @@ def vowelsonly(s):
 
     # last remaining
     if current: parts.append(''.join(current))
-    print(current)
+    print(current, parts)
     best = float('-inf')
 
     # if vowel substring is at front and end, aaaBBaaaBBaaa
@@ -89,9 +89,9 @@ def vowelsonly(s):
     return best
 
 print(vowelsonly('aaabbaaba'), 6)
-print(vowelsonly('aaabbaab'), 5)
-print(vowelsonly('bbaaabbaa'), 5)
-print(vowelsonly('bbaaabbaabbb'), 3)
-print(vowelsonly('ffaoaoeffaaff'), 5)
-print(vowelsonly('aoao'), 4)
-print(vowelsonly('frfr'), 0)
+# print(vowelsonly('aaabbaab'), 5)
+# print(vowelsonly('bbaaabbaa'), 5)
+# print(vowelsonly('bbaaabbaabbb'), 3)
+# print(vowelsonly('ffaoaoeffaaff'), 5)
+# print(vowelsonly('aoao'), 4)
+# print(vowelsonly('frfr'), 0)

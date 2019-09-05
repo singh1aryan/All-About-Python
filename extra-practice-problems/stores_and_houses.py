@@ -1,3 +1,5 @@
+# returns the nearest house in the second array
+# so if we have 5,10,17 - returns an array of numbers nearest to these numbers
 def house(h, s):
     s=sorted(s)
     a=[]

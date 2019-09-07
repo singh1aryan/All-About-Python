@@ -36,8 +36,33 @@
 #     print(a)
 
 # The key - use 2sum to simplify the problem - 2 sum can be solved using 2 pointers
-
+b=[]
 def threesum(nums, target):
+    
+    nums = sorted(nums)
+    for i in range(0,len(nums)-2):
+        target = -nums[i]
+        l=i+1
+        r=len(nums)-1
+        twosum(nums, target, l, r)
+            
+    print(b)
+
+def twosum(nums, target, l, r):
+    while l<r:
+        if nums[l]+nums[r]==target:
+            k=[]
+            k.append(-target)
+            k.append(nums[l])
+            k.append(nums[r])
+            b.append(k)
+        l+=1
+        r-=1
+        while l<r and nums[l]==nums[l-1]:
+            l+=1
+        while l<r and nums[r]==nums[r+1]:
+            r-=1
+    return -1
 
 nums = [-1, 0, 1, 2, -1, -4]
 target =0

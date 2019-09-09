@@ -14,6 +14,7 @@ def binarysearch(arr, target):
     while(l<r):
         mid = int((l+r)/2)
         if r-mid == 1:
+            # check for the difference between target and that element
             if abs(target-arr[mid])>abs(target-arr[r]):
                 return arr[r]
             else:

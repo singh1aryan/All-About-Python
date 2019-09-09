@@ -3,8 +3,8 @@
 
 # Python code to check valid possible IP 
   
-# Function checks wheather IP digits 
-# are valid or not. 
+# Function checks wheather IP digits form a valid ip or not
+# 
 def is_valid(ip): 
   
     # Spliting by "." 

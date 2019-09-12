@@ -4,6 +4,9 @@
 
 ## Important Questions/Concepts
 
+### Slicing in Python
+* Super useful - specially to get a brute force quickly
+
 ### Data Structures
 * Stack, Queue, Heap, Tree, Arrays, Linked List
 

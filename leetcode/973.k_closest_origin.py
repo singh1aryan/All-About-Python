@@ -5,27 +5,26 @@
 
 # Input: points = [[1,3],[-2,2]], K = 1, Output: [[-2,2]]
 import math
-class Solution:
-    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
-            d=[]
-            for i in range(0,len(points)):
-                d.append((self.dist(points[i]),i))
+def kClosest(points,K):
+        d=[]
+        for i in range(0,len(points)):
+            d.append((dist(points[i]),i))
 
-            d=sorted(d)
-            print(d)
-            a=[]
-            for i in d:
-                a.append(points[i[1]])
-                K-=1
-                if K==0:
-                    break
-            return a
+        d=sorted(d)
+        print(d)
+        a=[]
+        for i in d:
+            a.append(points[i[1]])
+            K-=1
+            if K==0:
+                break
+        return a
 
-    def dist(self, arr):
-        return math.sqrt(pow(arr[0],2)+pow(arr[1],2))
+def dist(arr):
+    return math.sqrt(pow(arr[0],2)+pow(arr[1],2))
 
 
-print(closest([[1,3],[-2,2]], 1))
+print(kClosest([[1,3],[-2,2]], 1))
 # class Solution(object):
 #     def kClosest(self, points, K):
 #         points.sort(key = lambda P: P[0]**2 + P[1]**2)

@@ -1,8 +1,7 @@
-# earthproblem
-# letsgosomewhere
-# Sample Output
-# 3
-# 2
+# remove the consonants such that the remaining string
+# has the maximum vowels
+
+
 vowels = ["a","e","i","o","u"]
 a=[]
 # def longest(str):

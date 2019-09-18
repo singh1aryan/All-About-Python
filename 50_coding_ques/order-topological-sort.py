@@ -1,4 +1,9 @@
-
+"""
+ - pick an unvisited node
+ - check children - if explored or not
+ - add to visited if not explored
+ - if children not explored - add to stack,temp and choose another one again - recursive
+"""
 def buildOrder(nums):
     temp = set()
     visited = set()

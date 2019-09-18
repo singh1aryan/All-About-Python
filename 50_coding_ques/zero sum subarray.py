@@ -8,6 +8,9 @@ max substring window might help
 first thought -> 2 pointers from the starting, shifting one another
 dp - probably not or maybe yes - using 1d matrix
 
+solution - 
+1. simple check if prefix is repeating or the sum==0
+2. make a dp 2d array, add dp[i-1] + nums[i] to dp[i] and check if you have a 0 or not
 """
 
 # def subarray(nums):

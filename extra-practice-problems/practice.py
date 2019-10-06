@@ -51,7 +51,7 @@ def permute(a,b):
             permute(a+[b[i]], r)#inclusion
 
 # permute([],[1,2,3])
-print(per)
+# print(per)
 
 
 # stack = []
@@ -68,15 +68,64 @@ print(per)
 #     return True
 # else:
 #     return False
-dp = [[1,2,3,4],[4,3,2,4],[2,20,100,30]]
-n=3
-m=4
-for i in range(n):
-    for j in range(m):
-        if i==0:
-            continue
-        else:
-            print(i,j)
-            dp[i][j] += min(dp[i-1][0:j] + dp[i-1][j:])#min of exluding that color
+# dp = [[1,2,3,4],[4,3,2,4],[2,20,100,30]]
+# n=3
+# m=4
+# for i in range(n):
+#     for j in range(m):
+#         if i==0:
+#             continue
+#         else:
+#             print(i,j)
+#             dp[i][j] += min(dp[i-1][0:j] + dp[i-1][j:])#min of exluding that color
             
-print(dp)
+# print(dp)
+
+def getEventsOrder(team1, team2, events1, events2):
+    a= [e for t, e in sorted(getEventsArr(team1, events1) + getEventsArr(team2, events2))]
+    print(a)
+
+def getEventsArr(team, events):
+    arr = []
+    for e in events:
+        e_sp = e.split()
+
+        # get time
+        time = None
+        if e_sp[1].isnumeric(): time = int(e_sp[1])
+        elif e_sp[2].isnumeric(): time = int(e_sp[2])
+        elif '+' in e_sp[1]: time = float(''.join(e_sp[1].split('+')))
+        elif '+' in e_sp[2]: time = float(''.join(e_sp[2].split('+')))
+
+        if time // 100 == 0: time *= 10
+        arr.append((time, team + ' ' + e))
+    return arr
+
+events1 = ['ab 12 g','fn ln 43 y']
+events2 = ['ac 12 g','n3 46 y','n4 45+1 s sname']
+team1 = "EDC"
+team2 = "ABC"
+# getEventsOrder(team1, team2, events1, events2)
+# print(float(''.join("45+2".split('+')[0]+"."+"45+2".split('+')[1])))
+
+
+a = set()
+a.add(2)
+a.add(9)
+a.add(5)
+a.add(1)
+a.add(6)
+b=set()
+def dfs(a, target):
+    if target==0:
+        b.add(1)
+        return
+    if target<0:
+        return
+    for i in a:
+        dfs(a, target-i)
+
+print(dfs(a, 12))
+if 1 in b:
+    print('True')
+print(b)

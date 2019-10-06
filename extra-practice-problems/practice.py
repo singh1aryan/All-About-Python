@@ -50,5 +50,33 @@ def permute(a,b):
             print(r)
             permute(a+[b[i]], r)#inclusion
 
-permute([],[1,2,3])
+# permute([],[1,2,3])
 print(per)
+
+
+# stack = []
+# stack.append(root)
+# while len(stack)>0:
+#     a = stack.pop()
+#     visited_set.add(a)
+#     if a is leaf_node:# a does not have neighbors
+#         break
+#     if a has neighbors:
+#         stack.append(neighbors)
+
+# if length of visited_set == number of nodes:
+#     return True
+# else:
+#     return False
+dp = [[1,2,3,4],[4,3,2,4],[2,20,100,30]]
+n=3
+m=4
+for i in range(n):
+    for j in range(m):
+        if i==0:
+            continue
+        else:
+            print(i,j)
+            dp[i][j] += min(dp[i-1][0:j] + dp[i-1][j:])#min of exluding that color
+            
+print(dp)

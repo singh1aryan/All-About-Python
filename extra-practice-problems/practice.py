@@ -125,7 +125,36 @@ def dfs(a, target):
     for i in a:
         dfs(a, target-i)
 
-print(dfs(a, 12))
-if 1 in b:
-    print('True')
-print(b)
+# print(dfs(a, 12))
+# if 1 in b:
+#     print('True')
+# print(b)
+
+
+def penguin_leader():
+    # fill the adjancy matrix if not made
+    # dfs traversal with a full queue
+    queue = []
+
+    while len(queue)>0: # while queue is not empty
+        element = q.pop()
+        top_order.append(element)
+
+        for i in graph:
+            degree-=1
+            if degree becomes 0:
+                queue.append(i)
+
+        count+=1
+    if count != number of nodes:
+        # There is a cycle in the graph
+    else:
+        # Topological sort works
+
+
+# Sort jobs by finish times so that f1 ≤ f2 ≤ ... ≤ fn.
+A = set()
+for j in range(1,n):
+    if Job[j] compatible with A:
+        A.add(j)
+return A

@@ -131,25 +131,25 @@ def dfs(a, target):
 # print(b)
 
 
-def penguin_leader():
-    # fill the adjancy matrix if not made
-    # dfs traversal with a full queue
-    queue = []
+# def penguin_leader():
+#     # fill the adjancy matrix if not made
+#     # dfs traversal with a full queue
+#     queue = []
 
-    while len(queue)>0: # while queue is not empty
-        element = q.pop()
-        top_order.append(element)
+#     while len(queue)>0: # while queue is not empty
+#         element = q.pop()
+#         top_order.append(element)
 
-        for i in graph:
-            degree-=1
-            if degree becomes 0:
-                queue.append(i)
+#         for i in graph:
+#             degree-=1
+#             if degree becomes 0:
+#                 queue.append(i)
 
-        count+=1
-    if count != number of nodes:
-        # There is a cycle in the graph
-    else:
-        # Topological sort works
+#         count+=1
+#     if count != number of nodes:
+#         # There is a cycle in the graph
+#     else:
+#         # Topological sort works
 
 
 # Sort jobs by finish times so that f1 ≤ f2 ≤ ... ≤ fn.
@@ -158,3 +158,51 @@ for j in range(1,n):
     if Job[j] compatible with A:
         A.add(j)
 return A
+
+priority_queue = []
+priority_queue.append(root)
+while len(priority_queue)>0:
+    tower = priority_queue.pop()
+
+    if tower == final_tower:
+        return True
+        
+    if a is leaf_node:# towers has no other towers connected
+        continue # don't do anything
+
+    else: # tower has other towers connected  
+        for all neighbors: # add all the VALID neighboring towers
+            if neighbor time < reaching time:
+                priority_queue.append(neighbors)
+
+
+list = []
+road = (road, path, taken, weight)
+blocked - boolean value - if seen a road block or not
+path - path taken till now
+weight - total weight till now
+visited_cities = set()
+# the variables can be in tuples, priority queue or even as class variables in the __init__ constructor
+def roads:
+    q = []
+    q.append((road, path, taken, weight))
+    while len(q)>0:
+        current_city = q.pop() # q -> priority queue - gives the least cost road
+        visited_cities.add(current_city)
+        if current_city == destination: # if we reach the end, return the path
+            return current_city.path
+        else:
+            for next_city in neighbors:
+                if road(current_city, next_city) is  blocked:
+                    if current_city.blocked == True: # you've seen 2 blocked roads on the same path
+                        continue 
+                    else:
+                        next_city.blocked = true # mark the road as blocked for future check
+                        q.append(next_city # add the city to the queue
+                else:
+                    q.append(next_city) # add the city if the road is clear
+                
+            
+        
+
+

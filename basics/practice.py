@@ -53,11 +53,11 @@ b = [2,1]
 threewaysort(a,0,len(a)-1)
 print(a)
 
-def value(root):
-    if not root.left and not root.right:
-        return  root.left + root.right
+# def value(root):
+#     if not root.left and not root.right:
+#         return  root.left + root.right
     
-    return value(root.left)+value(root.right)+helper(root)
+#     return value(root.left)+value(root.right)+helper(root)
 
-def helper():
-    # find the product of leftmost and rightmost node of the right and left node
+# def helper():
+#     # find the product of leftmost and rightmost node of the right and left node

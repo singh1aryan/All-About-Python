@@ -20,23 +20,65 @@ class Course:
         courses2 = ['C220','C230','C240','C250']
         courses3 = ['C305', 'C311', 'C320', 'C326', 'C328', 'C345', 'C348', 'C365', 'C370', 'C373' , 'C377', 'C383', 'C390N']
 
-
-        prereq_for_inter = ['C187', 'M132']
-        c['C311'] = ['C250'] # it should automatically include the prereq for 250 now
-        c['C345'] = ['C187']
-        c['C320'] = ['C']
-        c['C383'] = ['C250', 'S515,C240'] # , means that we can choose either of them
+        self.courses['M132'] = ['M131']
+        self.courses['C187'] = ['C121', 'M132']
+        self.courses['C250'] = ['C187']
+        self.courses['C311'] = ['C250'] # it should automatically include the prereq for 250 now
+        self.courses['C345'] = ['C187']
+        self.courses['C320'] = ['C187']
+        self.courses['C383'] = ['C250', 'S515,C240'] # , means that we can choose either of them
+        self.courses['377'] = ['C250']
         
-        for i in courses1:
-            self.courses[i] = set()
-        for i in courses2:
-            self.courses[i] = set(prereq_for_inter)
+        # for i in courses1:
+        #     self.courses[i] = []
+        # for i in courses2:
+        #     self.courses[i] = prereq_for_inter
 
+    # visualize this as a tree 
+    # Doing BFS to find all the prereqs
     def get_prereq(self, course):
-        return self.courses[course]
+        a = []
+        stack = []
+        stack.append(course)
+        # [250,220,230] - gives us this, we need prereq for all of these
+        while len(stack)>0:
+            c = stack.pop()
+            a.append(c)
+            if c in self.courses:
+                # print(c)
+                # print(len(self.courses[c]))
+                # there is an optional subject for some, like stats 515 and cs 240
+                    
+                for i in self.courses[c]:
+                    if len(i)>4:
+                        op = i.split(',')
+                        stack.append(op[0])
+                        stack.append(op[1])
+                        continue
+                    stack.append(i)
+        # print(a)
+        a = self.rearrange(a[1:])
+        return 'Pre Req for ' + course + ' are: ' + str(a)
+
+    def rearrange(self, a):
+        m = []
+        n = []
+        for i in a:
+            b = i[1:]
+            m.append((i[0], int(b)))
+        m = sorted(m, key=lambda tup: (tup[0], tup[1]))
+        for i in m:
+            b = i[0]+str(i[1])
+            n.append(b)
+        return n
+        
 
     def classes_you_can_take(self, ):
+        pass
 
+a = Course()
+a.build_dict()
+print(a.get_prereq('C383'))
 
 
 

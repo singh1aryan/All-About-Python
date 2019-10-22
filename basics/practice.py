@@ -61,3 +61,11 @@ print(a)
 
 # def helper():
 #     # find the product of leftmost and rightmost node of the right and left node
+
+# for e = 1 to m do
+#     Let u and v be endpoints of e
+#     if find(u) != find(v): # Not in same component
+#         T = T ∪ {e}
+#         Union(find(u), find(v)) # Merge components
+#     end if
+# end for

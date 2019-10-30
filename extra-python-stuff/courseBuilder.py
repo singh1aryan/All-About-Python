@@ -14,20 +14,22 @@ class Course:
         self.courses = defaultdict()
 
     def build_dict(self):
-        b = set()
-        c = defaultdict()
-        courses1 = ['C105','C119','C121','C145','C186','C187','C197C','C197U']
-        courses2 = ['C220','C230','C240','C250']
-        courses3 = ['C305', 'C311', 'C320', 'C326', 'C328', 'C345', 'C348', 'C365', 'C370', 'C373' , 'C377', 'C383', 'C390N']
 
         self.courses['M132'] = ['M131']
-        self.courses['C187'] = ['C121', 'M132']
-        self.courses['C250'] = ['C187']
-        self.courses['C311'] = ['C250'] # it should automatically include the prereq for 250 now
+        self.courses['C187'] = ['C121', 'M101']
+        
+        self.courses['C220'] = ['C187']
+        self.courses['C230'] = ['C187']
+        self.courses['C240'] = ['C187', 'M132']        
+        self.courses['C250'] = ['C187', 'M132']
+
+        self.courses['C311'] = ['C187', 'C250,M455'] # it should automatically include the prereq for 250 now
         self.courses['C345'] = ['C187']
         self.courses['C320'] = ['C187']
         self.courses['C383'] = ['C250', 'S515,C240'] # , means that we can choose either of them
         self.courses['377'] = ['C250']
+
+        self.courses
         
         # for i in courses1:
         #     self.courses[i] = []
@@ -37,6 +39,8 @@ class Course:
     # visualize this as a tree 
     # Doing BFS to find all the prereqs
     def get_prereq(self, course):
+        b = defaultdict()
+        # b['o'] = ""
         a = []
         stack = []
         stack.append(course)
@@ -48,16 +52,36 @@ class Course:
                 # print(c)
                 # print(len(self.courses[c]))
                 # there is an optional subject for some, like stats 515 and cs 240
-                    
+                k=0
                 for i in self.courses[c]:
                     if len(i)>4:
+                        # make a new list and add all of them to it
+                        # add a matching letter to the end of it and then classify at the end of it 
+                        # make a dictionary and store things to that
+                        # if we choose 455, then prereq for that are different - that should be the option case
+                        # dictionary? - how to add - various ways - w numbers, each other sounds good
                         op = i.split(',')
+                        b[op[0]] = op[1]
                         stack.append(op[0])
                         stack.append(op[1])
                         continue
                     stack.append(i)
         # print(a)
+        a = list(set(a))
         a = self.rearrange(a[1:])
+        for i in b:
+            print(i,b[i])
+        final_list = []
+        # there has to be a better way than this
+        # for i in b:
+        #     new_list = a
+        #     new_list.remove(i)
+        #     final_list.append(new_list)
+        #     new_list.append(i)
+        #     new_list.remove(b[i])
+        #     final_list.append(new_list)
+
+        # print(final_list)
         return 'Pre Req for ' + course + ' are: ' + str(a)
 
     def rearrange(self, a):
@@ -78,7 +102,8 @@ class Course:
 
 a = Course()
 a.build_dict()
-print(a.get_prereq('C383'))
+print(a.get_prereq('C311'))
+
 
 
 
@@ -90,11 +115,14 @@ print(a.get_prereq('C383'))
 # COMPSCI	187	Programming with Data Structures	4
 # COMPSCI	197C	Special Topics - Programming in C	1
 # COMPSCI	197U	Special Topics - A Hands-on Introduction to UNIX	1
+# COMPSCI 198J Practicum - High School Teaching Practicum
+
 # COMPSCI	220	Programming Methodology	4
 # COMPSCI	230	Computer Systems Principles	4
 # COMPSCI	240	Reasoning Under Uncertainty	4
 # COMPSCI	250	Introduction to Computation	4
 # COMPSCI	H250	Honors Colloquium for Introduction to Computation	1
+
 # COMPSCI	305	Social Issues in Computing	3
 # COMPSCI	311	Introduction to Algorithms	4
 # COMPSCI	H311	Honors Colloquium for Introduction to Algorithms	1

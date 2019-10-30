@@ -69,3 +69,29 @@ print(a)
 #         Union(find(u), find(v)) # Merge components
 #     end if
 # end for
+
+def value(array):
+    s = array[0]
+    for i in range(1,len(array)):
+        s += array[i]
+        s += array[i-1]*array[i]
+    return s
+
+def height(node): 
+    if node is None: 
+        return 0 ; 
+    return 1 + max(height(node.left) ,height(node.right)) 
+  
+# Function to get the diamtere of a binary tree 
+left_height=0
+right_height=0
+def diameter(root):  
+    # Base Case when root is None or after leaf node 
+    if root is None: 
+        return 0; 
+  
+    left = diameter(root.left) 
+    right = diameter(root.right) 
+   
+    a = max(left, right)
+    return max(left_height + right_height + 1, a)

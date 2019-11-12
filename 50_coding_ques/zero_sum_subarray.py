@@ -31,5 +31,8 @@ def subarray(nums):
         if sum==0 or sum in s:
             return True
         s.add(sum)
+  	print(s)
+  	# return False
 
 print(subarray([1,2,-5,1,2,-1]))
+print(subarray([-1,-2,5, -3]))

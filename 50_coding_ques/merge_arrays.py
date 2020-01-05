@@ -43,6 +43,7 @@ def merge2Arrays(a1, a2):
 
 print(merge2Arrays([1,2,4],[3,6,9]))
 print(mergeArrays([[1, 4, 7],[2, 5, 8],[3,6,9]]))
+# print(5)
 
 '''
 Merge K lists - linked list:
